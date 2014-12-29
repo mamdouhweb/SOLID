@@ -11,8 +11,7 @@ EOF;
 
 if ($argc < 3 || in_array($argv[1], array('--help', '-help', '-h', '-?'))) {
 
-printMessage("This is a command line PHP script with one option.
-
+printMessage("
   Usage:
   <?php echo $argv[0]; ?> <option>
 
