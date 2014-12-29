@@ -23,11 +23,14 @@ abstract class View {
     
     private $templatePath;
     
+    private $sharedTemplatePath;
+    
     const TEMPLATES_FOLDER = 'Application/Templates';
 
     public function __construct() {
         $this->assets = new Assets;
         $this->templatePath = ROOT . DOCUMENT_SEPARATOR . APPNAME . self::TEMPLATES_FOLDER . DOCUMENT_SEPARATOR ;
+        $this->sharedTemplatePath = 'Shared' ;
         
     }
     
@@ -47,7 +50,16 @@ abstract class View {
         
         $className = array_pop(explode('\\', get_class($this)));
         
-        $templateName = $this->templatePath . $className . DOCUMENT_SEPARATOR . $templateName;
+        if(strpos(strtolower($templateName), 'shared') !== false){
+            $templateArray = explode('.', $templateName);
+            if(count($templateArray) >= 2 && strtolower($templateArray[0]) == 'shared'){
+                unset($templateArray[0]);
+                $sharedTemplateName = implode('.', $templateArray);
+                $templateName = $this->templatePath . $this->sharedTemplatePath . DOCUMENT_SEPARATOR . $sharedTemplateName;
+            }
+        }else{
+            $templateName = $this->templatePath . $className . DOCUMENT_SEPARATOR . $templateName;
+        }
         
         $this->loadActual($templateName);
         
