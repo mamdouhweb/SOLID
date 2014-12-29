@@ -6,7 +6,7 @@
 
 /**
  * @package SOLID 0.1
- * @author <all@lapp.com>
+ * @author <alramadan.mamdouh@gmail.com>
  */
 
 namespace Exceptions\Source\Models;
