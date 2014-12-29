@@ -1,0 +1,68 @@
+#!/usr/bin/php
+<?php
+
+function printMessage($message){
+print <<< EOF
+    
+    $message;
+
+EOF;
+}
+
+if ($argc < 3 || in_array($argv[1], array('--help', '-help', '-h', '-?'))) {
+
+printMessage("This is a command line PHP script with one option.
+
+  Usage:
+  <?php echo $argv[0]; ?> <option>
+
+  <option> can be some word you would like
+  to print out. With the --help, -help, -h,
+  or -? options, you can get this help.
+");
+
+} else {
+    //start reading command args
+
+    $commandArguments = $argv;
+    if(count($commandArguments) >=3){
+	$solidFileType = $commandArguments[1];
+	$solidFileName = $commandArguments[2];
+        createSolidComponent($solidFileType,$solidFileName);
+    }else{
+    	echo 'passed less than 3 args';
+    }	
+}
+
+function createSolidComponent($type, $name){
+    $solidCurrentDirectory = getcwd();
+    switch ($type){
+        case 'model':
+            createModel($name,$solidCurrentDirectory);
+            printMessage("Model $name created successfully");
+            break;
+        case 'controller':
+            createController($name,$solidCurrentDirectory);
+            break;
+        default:
+            printMessage("Component type not found");
+            break;
+    }
+}
+
+function createController($name,$path){
+    $template = "<?php \r\n \r\n \r\n class " . ucfirst(strtolower($name)) . " extends SolidController{\r\n \r\n \r\n}";
+    file_put_contents($path . "/Application/ApplicationControllers/" . ucfirst(strtolower($name)) . ".php", $template);
+}
+
+function createModel($name,$path){
+    $template = "<?php \r\n \r\n \r\n"
+              . "namespace Models; \r\n"
+              . "use Core\Models\Classes\Model; \r\n \r\n \r\n"
+              . "class " . ucfirst(strtolower($name)) . " extends Model{\r\n \r\n \r\n"
+              . "    public function __construct() { \r\n"
+              . "        parent::__construct(); \r\n"
+              . "    }\r\n \r\n \r\n"
+              . "}";
+    file_put_contents($path . "/Application/Models/" . ucfirst(strtolower($name)) . ".php", $template);
+}

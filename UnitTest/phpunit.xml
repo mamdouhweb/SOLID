@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+>
+    <php>
+        <var name="DB_DSN" value="pgsql:host=*;port=*;dbname=*" />
+        <var name="DB_USER" value="" />
+        <var name="DB_PASSWD" value="" />
+        <var name="DB_DBNAME" value="" />
+    </php>
+    <testsuites>
+        <testsuite name="SystemTest">
+            <directory>System/</directory>
+        </testsuite>
+    </testsuites>
+
+
+</phpunit>

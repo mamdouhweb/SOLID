@@ -1,0 +1,28 @@
+{
+    "name": "SOLID",
+    "autoload":{
+        "psr-0":{
+            "Handlers":"System/",
+            "Facade":"System/",
+            "Core":"System/",
+            "Exceptions":"System/",
+            "ApplicationControllers":"Application/",
+            "ApplicationFacade":"Application/",
+            "Hooks":"Application/",
+            "Mappers":"Application/",
+            "Services":"Application/",
+            "Models":"Application/",
+            "Views":"Application/"
+        },
+        
+        "psr-4": {
+                "Auryn\\": "vendor/rdlowrey/auryn/lib"
+        }
+    },
+    "require":{
+        "filp/whoops": "1.*",
+        "monolog/monolog" :"~1.7",
+        "rdlowrey/auryn" : "*",
+        "mailgun/mailgun-php":"~1.7.2"
+    }
+}
